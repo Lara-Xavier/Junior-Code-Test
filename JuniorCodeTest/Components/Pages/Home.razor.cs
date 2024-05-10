@@ -9,7 +9,7 @@ namespace JuniorCodeTest.Components.Pages
 	public partial class Home : ComponentBase
 	{
 		public List<RequestedUsersModel> RandomUsers { get; set; } = [];
-
+̦
 		[Inject]
 		private IRandomUserApiService? RandomUserApiService { get; set; }
 
@@ -33,5 +33,17 @@ namespace JuniorCodeTest.Components.Pages
 			var users = await RandomUserApiService.GetRandomUserDataFromApi();
 			RandomUsers.AddRange(users);
 		}
+		  async Task RefreshUserList()
+        {
+            try
+            {
+                RandomUsers.Clear(); // Clear existing user list
+                await PopulateUserList(); // Fetch and populate with new random users
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+        }
 	}
 }
